@@ -264,7 +264,7 @@ jobs:
         echo "SUSFS_KERNEL_VERSION=4.9" >> $GITHUB_ENV
         // SUSFS_KERNEL_VERSION found in kernel/Makefile
 
-    - name: Setup SUSFS For Kernel
+    - name: Setup SUSFS For KernelSU
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         git clone --recursive ${{ env.SUSFS_SOURCE }} -b ${{ env.SUSFS_SOURCE_BRANCH }} susfs4ksu --depth=1
