@@ -277,7 +277,7 @@ jobs:
         cp susfs4ksu/kernel_patches/fs/* fs/
         cp susfs4ksu/kernel_patches/include/linux/* include/linux/
         cd KernelSU-Next
-        patch -p1 < 10_enable_susfs_for_ksu.patch
+        echo "patch -p1 < 10_enable_susfs_for_ksu.patch"
         cd ../
         patch -p1 < 50_add_susfs_in_kernel-$SUSFS_KERNEL_VERSION.patch
     - name: Build kernel
