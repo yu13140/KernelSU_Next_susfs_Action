@@ -56,6 +56,9 @@ jobs:
             KSU_EXPECTED_SIZE
             KSU_EXPECTED_HASH
             REMOVE_UNUSED_PACKAGES
+            ENABLE_SUSFS
+            SUSFS_SOURCE_BRANCH
+            SUSFS_SOURCE
         )
 
         for CONFIG in "${CONFIG_LIST[@]}"; do
@@ -246,6 +249,7 @@ jobs:
         max-size: 2G
 
     - name: Setup SUSFS For KernelSU Environment&Kernel Config
+      if: env.ENABLE_SUSFS == 'true'
       run: |  
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         echo "CONFIG_KSU_SUSFS=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
@@ -264,6 +268,7 @@ jobs:
         echo "SUSFS_KERNEL_VERSION=4.9" >> $GITHUB_ENV
 
     - name: Setup SUSFS For KernelSU
+      if: env.ENABLE_SUSFS == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         git clone --recursive ${{ env.SUSFS_SOURCE }} -b ${{ env.SUSFS_SOURCE_BRANCH }} susfs4ksu --depth=1
