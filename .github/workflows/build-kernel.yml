@@ -55,10 +55,7 @@ jobs:
             SOURCE_BOOT_IMAGE
             KSU_EXPECTED_SIZE
             KSU_EXPECTED_HASH
-            REMOVE_UNUSED_PACKAGES
-            ENABLE_SUSFS
-            SUSFS_SOURCE_BRANCH
-            SUSFS_SOURCE
+            REMOVE_UNUSED_PACKAGES            
         )
 
         for CONFIG in "${CONFIG_LIST[@]}"; do
