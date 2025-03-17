@@ -1,0 +1,35 @@
+name: GitHub Actions To Move Folder
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Move Folder
+    runs-on: ubuntu-latest
+    env:
+      PAT: ${{ secrets.ACCESS_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set Git Identity
+        run: |
+          git config --global user.name "yu13140"
+          git config --global user.email "whmyc801@gmail.com"
+
+      - name: Execute Move Script
+        run: |                  
+          git clone -b cherry/master https://github.com/yu13140/kernel_cherry_sdm439.git
+          git clone -b olive-q-oss https://github.com/yu13140/Xiaomi_Kernel_OpenSource.git
+          cp -r "$GITHUB_WORKSPACE/Xiaomi_Kernel_OpenSource/drivers/net/wireless/"* \
+          "$GITHUB_WORKSPACE/kernel_cherry_sdm439/drivers/net/wireless/"
+          cd "$GITHUB_WORKSPACE/kernel_cherry_sdm439"
+          git remote set-url origin "https://${PAT}@github.com/yu13140/kernel_cherry_sdm439.git"
+          git add .
+          git commit -m "try move"
+          git push -u origin cherry/master          
