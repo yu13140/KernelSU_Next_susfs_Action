@@ -1,6 +1,6 @@
 name: GitHub Actions To Move Folder
 
-on:  
+on:
   workflow_dispatch:
 
 jobs:
@@ -11,15 +11,15 @@ jobs:
       PAT: ${{ secrets.ACCESS_TOKEN }}
     steps:
       - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        persist-credentials: false
-        fetch-depth: 0
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Set Git Identity
         run: |
           git config --global user.name "yu13140"
-          git config --global user.email "whmyc801@gmail.com"  
+          git config --global user.email "whmyc801@gmail.com"
 
       - name: Execute Move Script
         run: |
