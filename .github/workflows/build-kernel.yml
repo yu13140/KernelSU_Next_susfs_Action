@@ -1,5 +1,5 @@
 name: Build Kernel
-on:  
+on:
   workflow_dispatch:
 
 jobs:
@@ -55,7 +55,10 @@ jobs:
             SOURCE_BOOT_IMAGE
             KSU_EXPECTED_SIZE
             KSU_EXPECTED_HASH
-            REMOVE_UNUSED_PACKAGES            
+            REMOVE_UNUSED_PACKAGES
+            ENABLE_SUSFS
+            SUSFS_SOURCE_BRANCH
+            SUSFS_SOURCE
         )
 
         for CONFIG in "${CONFIG_LIST[@]}"; do
@@ -203,9 +206,9 @@ jobs:
       if: env.ENABLE_KERNELSU == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        curl -LSs "https://raw.githubusercontent.com/ShirkNeko/KernelSU/main/kernel/setup.sh" | bash -s susfs-dev
-        KSU_VERSION=$(cd KernelSU && expr $(/usr/bin/git rev-list --count HEAD) + 10200)
-        echo "UPLOADNAME=-SukiSU_$KSU_VERSION" >> $GITHUB_ENV
+        curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s ${{ env.KERNELSU_TAG }}
+        KSU_VERSION=$(cd KernelSU-Next && expr $(/usr/bin/git rev-list --count HEAD) + 10200)
+        echo "UPLOADNAME=-KernelSU_Next_$KSU_VERSION" >> $GITHUB_ENV
 
     - name: Setup Configuration for Kernel
       run: |
