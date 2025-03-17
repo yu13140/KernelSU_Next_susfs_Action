@@ -1,7 +1,7 @@
 name: GitHub Actions To Move Folder
 
 on:
-  push
+  push:
   workflow_dispatch:
 
 jobs:
