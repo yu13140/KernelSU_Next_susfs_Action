@@ -3,8 +3,8 @@
 # Copy a folder from one git repo to another git repo,
 # preserving full history of the folder.
 
-SRC_GIT_REPO='https://github.com/yu13140/Xiaomi_Kernel_OpenSource'
-DST_GIT_REPO='https://github.com/yu13140/kernel_cherry_sdm439'
+SRC_GIT_REPO='https://github.com/yu13140/Xiaomi_Kernel_OpenSource.git'
+DST_GIT_REPO='https://github.com/yu13140/kernel_cherry_sdm439.git'
 SRC_BRANCH_NAME='olive-q-oss'
 DST_BRANCH_NAME='cherry/master'
 # Most likely you want the REWRITE_FROM and REWRITE_TO to have a trailing slash!
