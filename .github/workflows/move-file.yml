@@ -25,9 +25,16 @@ jobs:
       - name: Execute Move Script
         run: |
           if [ -f "$GITHUB_WORKSPACE/.github/workflows/move-folder.sh" ]; then
-            echo "找到脚本文件，开始执行..."
+            echo "找到脚本文件，开始执行..."            
+            git clone -b cherry/master https://github.com/yu13140/kernel_cherry_sdm439.git
+            git clone -b olive-q-oss https://github.com/yu13140/Xiaomi_Kernel_OpenSource.git
+            cp -r "$GITHUB_WORKSPACE/Xiaomi_Kernel_OpenSource/drivers/net/wireless/"* \
+           "$GITHUB_WORKSPACE/kernel_cherry_sdm439/drivers/net/wireless/"
+            cd "$GITHUB_WORKSPACE/kernel_cherry_sdm439"
             git remote set-url origin "https://${PAT}@github.com/yu13140/kernel_cherry_sdm439.git"
-            sh "$GITHUB_WORKSPACE/.github/workflows/move-folder.sh"
+            git add .
+            git commit -m "try move"
+            git push -u origin cherry/master
           else
             echo "未找到 move-folder.sh 脚本文件，请检查路径。"
             exit 1
