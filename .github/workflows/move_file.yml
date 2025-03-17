@@ -1,9 +1,10 @@
 name: GitHub Actions To Move Folder
-on: push
+on:    
     workflow_dispatch:
     
 jobs:
-  build-and-deploy:
+  build:
+    name: Move Folder
     runs-on: ubuntu-latest
     env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
