@@ -1,0 +1,15 @@
+name: GitHub Actions To Move Folder
+on: push
+    
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Move     
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        
+      run: sh ./.github/workflows/move_folder.sh    
