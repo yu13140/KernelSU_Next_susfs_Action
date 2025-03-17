@@ -12,4 +12,4 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         
-      run: sh ./.github/workflows/move_folder.sh    
+      run: sh ${{ GITHUB_WORKSPACE }}/.github/workflows/move_folder.sh    
