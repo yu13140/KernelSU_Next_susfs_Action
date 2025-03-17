@@ -1,6 +1,7 @@
 name: GitHub Actions To Move Folder
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
@@ -8,21 +9,23 @@ jobs:
     name: Move Folder
     runs-on: ubuntu-latest
     env:
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      PAT: ${{ secrets.ACCESS_TOKEN }}
+      - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+        fetch-depth: 0
 
-      - name: Debug Environment
+      - name: Set Git Identity
         run: |
-          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-          echo "当前工作目录: $(pwd)"
-          ls -la $GITHUB_WORKSPACE
+          git config --global user.name "yu13140"
+          git config --global user.email "whmyc801@gmail.com"  
 
       - name: Execute Move Script
         run: |
           if [ -f "$GITHUB_WORKSPACE/.github/workflows/move-folder.sh" ]; then
             echo "找到脚本文件，开始执行..."
+            git remote set-url origin "https://${PAT}@github.com/yu13140/kernel_cherry_sdm439.git"
             sh "$GITHUB_WORKSPACE/.github/workflows/move-folder.sh"
           else
             echo "未找到 move-folder.sh 脚本文件，请检查路径。"
