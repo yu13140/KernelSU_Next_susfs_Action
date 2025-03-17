@@ -1,16 +1,30 @@
 name: GitHub Actions To Move Folder
-on:    
-    workflow_dispatch:
-    
+
+on:
+  workflow_dispatch:
+
 jobs:
   build:
     name: Move Folder
     runs-on: ubuntu-latest
     env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Move                   
-      run: sh ${{ GITHUB_WORKSPACE }}/.github/workflows/move-folder.sh    
+      - name: Debug Environment
+        run: |
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "当前工作目录: $(pwd)"
+          ls -la $GITHUB_WORKSPACE
+
+      - name: Execute Move Script
+        run: |
+          if [ -f "$GITHUB_WORKSPACE/.github/workflows/move-folder.sh" ]; then
+            echo "找到脚本文件，开始执行..."
+            sh "$GITHUB_WORKSPACE/.github/workflows/move-folder.sh"
+          else
+            echo "未找到 move-folder.sh 脚本文件，请检查路径。"
+            exit 1
+          fi
