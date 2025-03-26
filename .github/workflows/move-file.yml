@@ -29,6 +29,10 @@ jobs:
           mkdir "$GITHUB_WORKSPACE/lolz_kernel_redmi8-for-ksu-/KernelSU"
           cp -r "$GITHUB_WORKSPACE/KernelSU/"* \
           "$GITHUB_WORKSPACE/lolz_kernel_redmi8-for-ksu-/KernelSU"
+          echo "Source directory contents:"
+          ls -lR "$GITHUB_WORKSPACE/KernelSU"
+          echo "Target directory contents:"
+          ls -lR "$GITHUB_WORKSPACE/lolz_kernel_redmi8-for-ksu-/KernelSU"
           cd "$GITHUB_WORKSPACE/lolz_kernel_redmi8-for-ksu-"
           git remote set-url origin "https://${PAT}@github.com/yu13140/lolz_kernel_redmi8-for-ksu-.git"
           git add .
